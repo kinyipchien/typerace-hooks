@@ -33,21 +33,34 @@ const App = () => {
     }
   };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className='App'>
+      <h2>TypeRace</h2>
+      <hr />
+      <h3>Snippet</h3>
+      <div>{snippet}</div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <h4>{
+        gameState.victory
+        ? `Done! Woot! Time: ${gameState.endTime}ms`
+        : null
+      }</h4>
+      <input
+        value={userText}
+        onChange={updateUserText}
+      />
+      <hr />
+      {buttonTextItems.map((textItem, index) => (
+        <button
+          key={textItem}
+          onClick={() => chooseSnippet(index)}
         >
-          Learn React
-        </a>
-      </header>
+          {textItem}
+        </button>
+      ))}
     </div>
   );
 };
