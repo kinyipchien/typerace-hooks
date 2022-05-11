@@ -1,7 +1,37 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
-function App() {
+const App = () => {
+  const buttonTextItems = [
+    'Bears, beets, battlestar galactica',
+    "What's Forrest Gump's password? 1Forrest1",
+    'Where do programmers like to hangout? The Foo Bar'
+  ];
+  const initialGameState = {
+    victory: null,
+    startTime: null,
+    endTime: null
+  };
+  const [snippet, setSnippet] = useState('');
+  const [userText, setUserText] = useState('');
+  const [gameState, setGameState] = useState(initialGameState);
+  const chooseSnippet = (index) => {
+    setSnippet(buttonTextItems[index]);
+    setGameState({
+      ...initialGameState,
+      startTime: new Date().getTime()
+    });
+  };
+  const updateUserText = (e) => {
+    setUserText(e.target.value);
+    if (e.target.value === snippet) {
+      setGameState({
+        ...gameState,
+        victory: true,
+        endTime: new Date().getTime() - gameState.startTime
+      })
+    }
+  };
   return (
     <div className="App">
       <header className="App-header">
@@ -20,6 +50,6 @@ function App() {
       </header>
     </div>
   );
-}
+};
 
 export default App;
